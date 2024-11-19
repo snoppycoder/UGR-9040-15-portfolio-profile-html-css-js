@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Milki's Portfolio</title>
 </head>
 <body>
-    <header role="banner">
+    <header>
         <nav aria-label="Main Navigation">
             <ul role="menubar">
                 <li role="none"><a href="#home" role="menuitem">HOME</a></li>
@@ -18,7 +18,7 @@
         </nav>
     </header>
 
-    <main id="main-content" role="main">
+    <main id="main-content">
         <section id="hero" aria-labelledby="hero-title">
             <img src="Images/hero_section.png" alt="Hero section background" aria-hidden="true">
             <h1 id="hero-title">Welcome to My Portfolio</h1>
@@ -26,37 +26,49 @@
                 <p>I am a Software Engineering Student & Full-Stack Developer Passionate about creating innovative solutions and mastering the art of coding. Passionate about creating innovative solutions and mastering the art of coding.</p>
             </article>
             <div role="group" aria-label="Call to action buttons">
-                <button>View My Works</button>
-                <button>Contact me!</button>
+                <a href="#projects" >View My Works</a>
+                <a  href="#contact">Contact me!</a>
             </div>
         </section>
 
-        <section id="introduction" aria-labelledby="intro-title">
-            <h2 id="intro-title">Introduction</h2>
+        <section id="about" aria-labelledby="intro-title">
+            <h2 id="intro-title">About Me</h2>
             <article>
+                <h2>Introduction</h2>
                 <img src="/placeholder.svg?height=200&width=300" alt="Profile Image" aria-describedby="profile-desc">
-                <p id="profile-desc">Brief introduction about yourself and your work...</p>
+                <p id="profile-desc">
+                    I am Milki, a third-year software engineering student with a strong foundation in JavaScript and a focus on building scalable and efficient applications. My experience includes developing a web application for task management, integrating APIs, and deploying applications on Render. I have worked on building RESTful APIs for real-time data processing and developing data visualization dashboards using JavaScript frameworks like React. Passionate about creating user-centric solutions, I strive to contribute to impactful projects that improve overall user experience and drive business outcomes.  
+                    <br>  
+                    <p>
+                      Listen <audio src="Audio/audio.mp3"></audio>
+
+
+                    </p>
+                    
+                </p>
             </article>
             <article>
-                <img src="/placeholder.svg?height=200&width=300" alt="Work Sample" aria-describedby="work-desc">
-                <p id="work-desc">Description of your work or skills...</p>
+                <h2>Education and Expretise</h2>
+                <p id="work-desc">
+                    
+                </p>
             </article>
         </section>
 
         <section id="services" aria-labelledby="services-title">
             <h2 id="services-title">What I Can Do For You</h2>
             <div role="list" aria-label="Services">
-                <article role="listitem">
+                <article >
                     <img src="/placeholder.svg?height=100&width=100" alt="" aria-hidden="true">
                     <h3>Service 1</h3>
                     <p>Description of service 1</p>
                 </article>
-                <article role="listitem">
+                <article >
                     <img src="/placeholder.svg?height=100&width=100" alt="" aria-hidden="true">
                     <h3>Service 2</h3>
                     <p>Description of service 2</p>
                 </article>
-                <article role="listitem">
+                <article >
                     <img src="/placeholder.svg?height=100&width=100" alt="" aria-hidden="true">
                     <h3>Service 3</h3>
                     <p>Description of service 3</p>
@@ -64,20 +76,20 @@
             </div>
         </section>
 
-        <section id="portfolio" aria-labelledby="portfolio-title">
+        <section id="projects" aria-labelledby="portfolio-title">
             <h2 id="portfolio-title">My Work</h2>
             <div role="list" aria-label="Portfolio Projects">
-                <article role="listitem">
+                <article >
                     <img src="/placeholder.svg?height=150&width=200" alt="Project 1 Screenshot">
                     <h3>Project 1</h3>
                     <p>Description of project 1</p>
                 </article>
-                <article role="listitem">
+                <article >
                     <img src="/placeholder.svg?height=150&width=200" alt="Project 2 Screenshot">
                     <h3>Project 2</h3>
                     <p>Description of project 2</p>
                 </article>
-                <article role="listitem">
+                <article">
                     <img src="/placeholder.svg?height=150&width=200" alt="Project 3 Screenshot">
                     <h3>Project 3</h3>
                     <p>Description of project 3</p>
@@ -86,7 +98,7 @@
         </section>
 
         <section id="contact" aria-labelledby="contact-title">
-            <h2 id="contact-title">Get In Touch</h2>
+            <h2 id="contact-title">Do You Want To Get In Touch?</h2>
             <form aria-label="Contact Form">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required aria-required="true">
@@ -103,7 +115,7 @@
     </main>
 
     <footer role="contentinfo">
-        <div>
+    
             <ul role="list" aria-label="Social Media Links">
                 <li role="listitem">
                     <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
@@ -121,7 +133,7 @@
                     </a>
                 </li>
             </ul>
-        </div>
+
     </footer>
 </body>
 </html>
