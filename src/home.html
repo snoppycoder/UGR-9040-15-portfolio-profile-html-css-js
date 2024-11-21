@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milki's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="icon" href="Images/portfolio.png" type="image/png">
 </head>
 <body>
@@ -23,9 +24,7 @@
         <section id="hero" aria-labelledby="hero-title">
             <img src="Images/hero_section.png" alt="Hero section background" aria-hidden="true">
             <h1 id="hero-title">Welcome to My Portfolio</h1>
-            <article>
                 <p>I am a Software Engineering Student & Full-Stack Developer Passionate about creating innovative solutions and mastering the art of coding. Passionate about creating innovative solutions and mastering the art of coding.</p>
-            </article>
             <div role="group" aria-label="Call to action buttons">
                 <a href="#projects" >View My Works</a>
                 <a  href="#contact">Contact me!</a>
@@ -42,9 +41,8 @@
                     <br>  
                     <p>
                       <span id="listen">Listen</span>  
-                       <audio src="Audio/audio.mp3" aria-labelledby="listen" controls></audio></p>
-                    
-                </p>
+                       <audio src="Audio/audio.mp3" aria-labelledby="listen" controls></audio>
+                    </p>
             </article>
             <article>
                 <h2>Education</h2>
@@ -54,9 +52,7 @@
                     <br>
                     Addis Ababa University, Ethiopia  
                     <br>
-                    
-                    <img src="Images/education_section.jpg" alt="campus_photo"
-                    width="300" height="200" /><br> 
+                    <img src="Images/education_section.jpg" alt="campus_photo" width="300" height="200"><br> 
                     Expected Graduation: Aug 2027  
                     <br>
                     <em>Currently pursuing a Bachelor's degree with a focus on building a strong foundation in software engineering principles, programming languages, and system architecture. Through my coursework, I've gained a deep understanding of data structures, algorithms, and the intricacies of web development, which have provided me with a solid technical skillset. This includes working with languages like JavaScript, HTML, and CSS, as well as frameworks such as React to build interactive web applications.</em>
@@ -153,14 +149,14 @@
             </article>
             <article class="certificate" aria-labelledby="certificate-heading">
                 <h2 id="certificate-heading">Certificate</h2>
-                <img src="Images/Certificate1.png" alt="Certificate of Excellence"/>
-               <img src="/placeholder.svg?height=200&width=300" alt="Certificate of Achievement" />
+                <img src="Images/Certificate1.png" width="300" alt="Certificate of Excellence">
+               <img src="placeholder.svg?height=200&width=300" alt="Certificate of Achievement">
          </article>
                    
              <article aria-labelledby="testimonials-heading">
                 <h2 id="testimonials-heading">Testimonials</h2>
-                <article class="testimonial">
-                    <img src="/placeholder.svg?height=80&width=80" alt="" class="testimonial-avatar" />
+                <div class="testimonial">
+                    <img src="placeholder.svg?height=80&width=80" alt="" class="testimonial-avatar">
                     <blockquote>
                            <p>The quality of work and attention to detail exceeded our expectations.</p>
                           <footer>
@@ -168,16 +164,16 @@
                            </footer>
                          </blockquote>
 
-                </article>
-                      <article class="testimonial">
-                        <img src="/placeholder.svg?height=80&width=80" alt="" class="testimonial-avatar" />
+                </div>
+                      <div class="testimonial">
+                        <img src="placeholder.svg?height=80&width=80" alt="" class="testimonial-avatar">
                         <blockquote>
                           <p>Delivered the project on time and with exceptional quality.</p>
                           <footer>
                             <cite>Michael Chen, Project Manager</cite>
                           </footer>
                         </blockquote>
-                      </article>
+                      </div>
                    
              </article>
         </section>
@@ -268,8 +264,7 @@
                     <p>
                         I offer a range of services to help individuals and businesses achieve their goals. My Standard Plan is perfect for those starting out, providing essential features like a basic website setup and email support. The Premium Plan is designed for those who want a more personalized touch, including custom design and enhanced support to elevate their online presence. For those with unique needs, my Custom Plan offers fully tailored solutions, ensuring every detail aligns with your vision. Whether you’re building a personal brand or scaling your business, I’m here to deliver results that matter.
                     </p>
-                        
-                </h2>
+             
             </article>
             <article class="pricing-table" aria-labelledby="table-heading">
                 <h2 id="table-heading">Pricing</h2>
@@ -343,22 +338,22 @@
         </section>
     </main>
 
-    <footer role="contentinfo">
+    <footer>
     
-            <ul role="list" aria-label="Social Media Links">
-                <li role="listitem">
+            <ul aria-label="Social Media Links">
+                <li >
                     <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                        <img src="Images/github_logo.png" alt="" width="40" height="40" aria-hidden="true">
+                        <i class="fa-brands fa-github"></i>
                     </a>
                 </li>
-                <li role="listitem">
+                <li >
                     <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                        <img src="Images/linkedIn_logo.png" alt="" width="40" height="40" aria-hidden="true">
+                        <i class="fa-brands fa-linkedin"></i>
                     </a>
                 </li>
-                <li role="listitem">
+                <li>
                     <a href="mailto:Milkilegese6@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Contact">
-                        <img src="Images/email_logo.png" alt="Email account" width="40" height="40" aria-hidden="true">
+                        <i class="fa-solid fa-envelope"></i>
                     </a>
                 </li>
             </ul>
