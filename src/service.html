@@ -5,77 +5,477 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service</title>
     <link rel="icon" href="Images/portfolio.png" type="image/png">
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            --color-primary: #FFD700;
+            --color-secondary: #B8860B;
+            --color-background: #1A1A1A;
+            --color-text: #FFFFFF;
+            --spacing-large: 2rem;
+            --spacing-medium: 1.5rem;
+            --spacing-small: 0.75rem;
+            --container-width: min(90%, 1200px);
+        
+}
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: var(--spacing-small);
+            background-color: rgba(26, 26, 26, 0.95);
+            animation: SlideLeft 0.5s ease-out;
+        }
+        .nav__list {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            list-style: none;
+            padding: var(--spacing-small) var(--spacing-medium);
+        }
+
+        .nav__item {
+            position: relative;
+        }
+
+        .nav__link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            transition: color 0.3s ease;
+        }
+
+        .nav__link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav__link--active {
+            position: relative;
+        }
+
+        .nav__link--active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .nav__link--active {
+            color: var(--color-primary);
+            position: relative;
+        }
+
+        .nav__link--active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primary);
+        } .nav__hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .nav__hamburger-line {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-text);
+            transition: 0.3s ease;
+        }
+            .nav__hamburger--active .nav__hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translateY(12px) translateX(2px)
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px)
+        }
+
+
+        /* Main Content */
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .services {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services__title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+        }
+
+        .service-card__title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .service-card__text {
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card__features {
+            list-style: none;
+        }
+
+        .service-card__feature {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-card__feature::before {
+            content: '•';
+            color: var(--color-primary);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Description Section */
+        .description {
+            max-width: 800px;
+            margin: 4rem auto;
+            text-align: center;
+        }
+
+        .description__title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            max-width: 1200px;
+            margin: 4rem auto;
+        }
+
+        .pricing__title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing__table {
+            max-width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4rem;
+            background-color: white;
+            color: black;
+        }
+
+        .pricing__table th {
+            background-color: var(--color-primary);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .pricing__table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+        }
+
+        .pricing__cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .price-card {
+            background-color: white;
+            color: black;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .price-card--dark {
+            background-color: #000;
+            color: white;
+        }
+
+        .price-card__title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-card__price {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .price-card__features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .price-card__feature {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .price-card__feature--included::before {
+            content: '✓';
+            color: #4CAF50;
+        }
+
+        .price-card__feature--excluded::before {
+            content: '×';
+            color: #f44336;
+        }
+
+        .price-card__button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--color-primary);
+            color: black;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .price-card__button:hover {
+            transform: translateY(-2px);
+        }
+        ::-webkit-scrollbar{ 
+            display: none;
+        }
+
+        .footer {
+        padding: var(--spacing-medium);
+        position: relative; 
+        width: 100%;
+        text-align: center;
+        background-color: #0000;
+        margin-top: auto; 
+        animation: fadeInUp 1.6s ease-out;
+    }
+
+        .footer__list {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-medium);
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .footer__item {
+            display: inline-block;
+        }
+       
+
+        .footer__link {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer__link:hover {
+            color: var(--color-primary);
+        }
+
+        .footer__icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer__icon:hover {
+            transform: translateY(-3px);
+        }
+
+   
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .services__grid {
+        display: flex;
+        scroll-snap-type: x mandatory;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+    }
+    .nav__hamburger {
+                display: flex;
+            }
+
+            .nav__list {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 50%;
+            width: 40%;
+            background-color: rgba(26, 26, 26, 0.95);
+            padding: var(--spacing-medium);
+            transform: translateX(100%); 
+            transition: transform 0.3s ease-in-out;/
+}
+
+.nav__list--active {
+    transform: translateX(0); /* Slide into view */
+}
+
+    .service-card {
+        flex: 0 0 auto; 
+        width: 100%; 
+        scroll-snap-align: start;
+    }
+
+            .pricing__table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .pricing__cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+     <script defer>
+        function toggleMenu() {
+            const hamburger = document.querySelector('.nav__hamburger');
+            const navList = document.querySelector('.nav__list');
+            hamburger.classList.toggle('nav__hamburger--active');
+            navList.classList.toggle('nav__list--active');
+        }
+    </script>
 </head>
 <body>
-     <header>
+    <header class="nav">
+        <div class="nav__hamburger" onclick="toggleMenu()">
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+        </div>
         <nav aria-label="Main Navigation">
-            <ul role="menubar">
-                <li role="none"><a href="home.html" role="menuitem">HOME</a></li>
-                <li role="none"><a href="about.html" role="menuitem">ABOUT</a></li>
-                <li role="none"><a href="blog.html" role="menuitem">BLOG</a></li>
-                <li role="none"><a href="service.html" role="menuitem">SERVICES</a></li>
-                <li role="none"><a href="contact.html" role="menuitem">CONTACT</a></li>
+            <ul class="nav__list" role="menubar">
+                <li class="nav__item" role="none">
+                    <a href="home.html" class="nav__link" role="menuitem">Home</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="about.html" class="nav__link" role="menuitem">About</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="blog.html" class="nav__link" role="menuitem">Blog</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="service.html" class="nav__link nav__link--active" role="menuitem">Service</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="contact.html" class="nav__link " role="menuitem">Contact</a>
+                </li>
             </ul>
         </nav>
     </header>
-    <main> 
-        
-        <section id="services" aria-labelledby="services-title">
-            <h2 id="services-title">Service</h2>
-            <div role="list" aria-label="Services">
-                <article aria-labelledby="service-heading" >
-                    <h3 id="service-heading"> What Can I Do For You </h3>
-                    <img src="/placeholder.svg?height=100&width=100" alt="" aria-hidden="true">
-                 
-                        <h3>Web Development</h3>
-                        <p>I specialize in crafting responsive and modern websites that bring your ideas to life. Whether you need a personal blog, a portfolio site, or a small business platform, I ensure a seamless online presence that reflects your vision.  
-                        </p>
-                        Features:
-                        <ul>
-                            <li>Clean and modern design </li>
-                            <li>Fully responsive and cross-device compatibility</li>    
-                            <li>SEO optimization for better search engine visibility</li>
-                        </ul>
-               
-                </article>
-                <article >
-                    <img src="/placeholder.svg?height=100&width=100" alt="" aria-hidden="true">
-                    
-                    <h3>UI/UX Design</h3>
-                    <p> I design user-friendly and aesthetically pleasing interfaces that make navigation effortless. My goal is to create digital experiences that captivate users while aligning with your brand identity.</p>
-                    Features:
-                    <ul>
-                        <li>Detailed wireframes and prototypes</li>
-                        <li>User-centric design principles</li>
-                        <li>  Accessibility and usability-focused solutions   </li>
-                       
-                    
+
+    <main class="main">
+        <section class="services">
+            <h1 class="services__title">What I Can Do For You</h1>
+            
+            <div class="services__grid">
+                <article class="service-card">
+                    <h2 class="service-card__title">UI/UX Design</h2>
+                    <p class="service-card__text">
+                        I design user-friendly and aesthetically pleasing interfaces that make navigation effortless. My goal is to create digital experiences that captivate users while aligning with your brand identity.
+                    </p>
+                    <ul class="service-card__features">
+                        <li class="service-card__feature">Detailed wireframes and prototypes</li>
+                        <li class="service-card__feature">User-centric design principles</li>
+                        <li class="service-card__feature">Accessibility and usability-focused solutions</li>
                     </ul>
                 </article>
-                <article >
-                    <img src="/placeholder.svg?height=100&width=100" alt="" aria-hidden="true">
-                    <h3>Custom Software Solutions</h3>
-                    <p>I develop custom software tailored to solve your unique challenges. Whether it’s automating workflows or building innovative tools, I ensure that the software meets your specific needs and scales with your growth.</p>
-                    Features:
-                    <ul>
-                        <li>Secure and scalable solutions </li>
-                        <li>Tailored functionality to meet requirements </li>
-                        <li> Maintenance and support for long-term reliability</li>
 
+                <article class="service-card">
+                    <h2 class="service-card__title">Web Development</h2>
+                    <p class="service-card__text">
+                        I specialize in crafting responsive and modern websites that bring your ideas to life. Whether you need a personal blog, a portfolio site, or a small business platform, I ensure a seamless online presence that reflects your vision.
+                    </p>
+                    <ul class="service-card__features">
+                        <li class="service-card__feature">Clean and modern design</li>
+                        <li class="service-card__feature">Fully responsive and cross-device compatibility</li>
+                        <li class="service-card__feature">SEO optimization for better search engine visibility</li>
+                    </ul>
+                </article>
 
+                <article class="service-card">
+                    <h2 class="service-card__title">Custom Software Solutions</h2>
+                    <p class="service-card__text">
+                        I develop custom software tailored to solve your unique challenges. Whether it's automating workflows or building innovative tools, I ensure that the software meets your specific needs and scales with your growth.
+                    </p>
+                    <ul class="service-card__features">
+                        <li class="service-card__feature">Secure and scalable solutions</li>
+                        <li class="service-card__feature">Tailored functionality to meet requirements</li>
+                        <li class="service-card__feature">Maintenance and support for long-term reliability</li>
                     </ul>
                 </article>
             </div>
-            <article aria-labelledby="desc-title">
-                <h2 id="desc-title"> Description of the plans </h2>
-                    <p>
-                        I offer a range of services to help individuals and businesses achieve their goals. My Standard Plan is perfect for those starting out, providing essential features like a basic website setup and email support. The Premium Plan is designed for those who want a more personalized touch, including custom design and enhanced support to elevate their online presence. For those with unique needs, my Custom Plan offers fully tailored solutions, ensuring every detail aligns with your vision. Whether you’re building a personal brand or scaling your business, I’m here to deliver results that matter.
-                    </p>
-             
-            </article>
-            <article class="pricing-table" aria-labelledby="table-heading">
-                <h2 id="table-heading">Pricing</h2>
-                <table>
+
+            <section class="description">
+                <h2 class="description__title">Description of the plans</h2>
+                <p>
+                    I offer a range of services to help individuals and businesses achieve their goals. My Standard Plan is perfect for those starting out, providing essential features like a basic website setup and email support. The Premium Plan is designed for those who want a more personalized touch, including custom design and enhanced support to elevate their online presence. For those with unique needs, my Custom Plan offers fully tailored solutions, ensuring every detail aligns with your vision. Whether you're building a personal brand or scaling your business, I'm here to deliver results that matter.
+                </p>
+            </section>
+
+            <section class="pricing">
+                <h2 class="pricing__title">Pricing</h2>
+                
+                <table class="pricing__table">
                     <thead>
                         <tr>
                             <th>Plan</th>
@@ -87,64 +487,93 @@
                     <tbody>
                         <tr>
                             <td>Standard</td>
-                            <td>Basic plan</td>
-                            <td>
-                                <ul>
-                                    <li>Website setup</li>
-                                    <li>Email support</li>
-                                </ul>
-                            </td>
-                            <td>2,500 ETB</td>
+                            <td>Basic Plan</td>
+                            <td>Email Support, Website Setup</td>
+                            <td>2500 ETB</td>
                         </tr>
                         <tr>
                             <td>Premium</td>
-                            <td>Advanced plan</td>
-                            <td>
-                                <ul>
-                                    <li>Website setup</li>
-                                    <li>Email and phone support</li>
-                                    <li>Custom design</li>
-                                </ul>
-                            </td>
-                            <td>5,000 ETB</td>
+                            <td>Advanced Plan</td>
+                            <td>Phone and Email Support</td>
+                            <td>5000 ETB</td>
                         </tr>
                         <tr>
                             <td>Custom</td>
-                            <td>Tailored plan</td>
-                            <td>
-                                <ul>
-                                    <li>Custom website</li>
-                                    <li>Priority support</li>
-                                    <li>Maintenance package</li>
-                                </ul>
-                            </td>
-                            <td>Contact for price</td>
+                            <td>Tailored Plan</td>
+                            <td>Custom Design, Priority Support, Maintenance Package</td>
+                            <td>Contact me</td>
                         </tr>
                     </tbody>
                 </table>
-            </article>
-            
+
+                <div class="pricing__cards">
+                    <div class="price-card">
+                        <h3 class="price-card__title">Standard</h3>
+                        <div class="price-card__price">2500 ETB</div>
+                        <p>per month/billed yearly</p>
+                        <ul class="price-card__features">
+                            <li class="price-card__feature price-card__feature--included">Email Support</li>
+                            <li class="price-card__feature price-card__feature--included">Website Setup</li>
+                            <li class="price-card__feature price-card__feature--excluded">Phone Support</li>
+                            <li class="price-card__feature price-card__feature--excluded">Custom Design</li>
+                            <li class="price-card__feature price-card__feature--excluded">Maintenance</li>
+                        </ul>
+                        <a href="#" class="price-card__button">Get Started</a>
+                    </div>
+
+                    <div class="price-card">
+                        <h3 class="price-card__title">Premium</h3>
+                        <div class="price-card__price">5000 ETB</div>
+                        <p>per month/billed yearly</p>
+                        <ul class="price-card__features">
+                            <li class="price-card__feature price-card__feature--included">Email Support</li>
+                            <li class="price-card__feature price-card__feature--included">Website Setup</li>
+                            <li class="price-card__feature price-card__feature--included">Phone Support</li>
+                            <li class="price-card__feature price-card__feature--included">Maintenance</li>
+                            <li class="price-card__feature price-card__feature--excluded">Custom Design</li>
+                        </ul>
+                        <a href="#" class="price-card__button">Get Started</a>
+                    </div>
+
+                    <div class="price-card price-card--dark">
+                        <h3 class="price-card__title">Custom</h3>
+                        <div class="price-card__price">Contact For Price</div>
+                        <p>per month/billed yearly</p>
+                        <ul class="price-card__features">
+                            <li class="price-card__feature price-card__feature--included">Email Support</li>
+                            <li class="price-card__feature price-card__feature--included">Website Support</li>
+                            <li class="price-card__feature price-card__feature--included">Email Support</li>
+                            <li class="price-card__feature price-card__feature--included">Priority Maintenance</li>
+                            <li class="price-card__feature price-card__feature--included">Custom Design</li>
+                        </ul>
+                        <a href="#" class="price-card__button">Contact Me</a>
+                    </div>
+                </div>
+            </section>
         </section>
     </main>
-    
-    <footer>
-        <ul aria-label="Social Media Links">
-            <li >
-                <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                    <img src="Images/github_logo.png" width="40" height="40" alt=" Check out my git hub">
+
+    <footer class="footer">
+        <ul class="footer__list" aria-label="Social Media Links">
+            <li class="footer__item">
+                <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" 
+                   aria-label="GitHub Profile" class="footer__link">
+                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThdZlszhihSfJBfoXkpJtOvDk9p_sskS4rSQ&s" class="footer__icon" alt="github link">
                 </a>
             </li>
-            <li >
-                <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                    <img src="Images/linkedIn_logo.png" width="40" height="40" alt="linked account">
+            <li class="footer__item">
+                <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" 
+                   rel="noopener noreferrer" aria-label="LinkedIn Profile" class="footer__link">
+                    <img src="https://i.pinimg.com/564x/6b/ab/30/6bab3017350ca04c6fa05569672bd31e.jpg" class="footer__icon" alt="LinkedIn">
                 </a>
             </li>
-            <li>
-                <a href="mailto:Milkilegese6@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Contact">
-                   <img src="Images/email_logo.png" width="40" height="40"  alt="email me">
+            <li class="footer__item">
+                <a href="mailto:example@email.com" target="_blank" rel="noopener noreferrer" 
+                   aria-label="Email Contact" class="footer__link">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKtMxPYeDrZNx4OsXl26sJgg1xcpeOKzoE3Q&s" class="footer__icon" alt="Email">
                 </a>
             </li>
         </ul>
-</footer>
+    </footer>
 </body>
 </html>

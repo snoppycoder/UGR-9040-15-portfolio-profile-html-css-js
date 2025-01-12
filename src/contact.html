@@ -3,60 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Me</title>
+    <title>Contact</title>
     <link rel="icon" href="Images/portfolio.png" type="image/png">
+    <style>
+        :root {
+            --color-primary: #FFD700;
+            --color-background: #1A1A1A;
+            --color-text: #FFFFFF;
+            --spacing-large: 2rem;
+            --spacing-medium: 1.5rem;
+            --spacing-small: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: var(--spacing-small);
+            background-color: rgba(26, 26, 26, 0.95);
+            animation: SlideLeft 0.5s ease-out;
+        }
+        .nav__list {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            list-style: none;
+            padding: var(--spacing-small) var(--spacing-medium);
+        }
+
+        .nav__item {
+            position: relative;
+        }
+
+        .nav__link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            transition: color 0.3s ease;
+        }
+
+        .nav__link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav__link--active {
+            position: relative;
+        }
+
+        .nav__link--active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .nav__link--active {
+            color: var(--color-primary);
+            position: relative;
+        }
+
+        .nav__link--active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primary);
+        } .nav__hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .nav__hamburger-line {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-text);
+            transition: 0.3s ease;
+        }
+            .nav__hamburger--active .nav__hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translateY(12px) translateX(2px)
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px)
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .contact {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .contact__title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact__subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #888;
+        }
+
+        .contact__form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #888;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background-color: #333;
+            color: var(--color-text);
+            font-size: 1rem;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        .phone-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .phone-group select {
+            flex: 0 0 120px;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--color-primary);
+            color: black;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #ccac00;
+        }
+
+        /* Footer */
+        .footer__list {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-medium);
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .footer__item {
+            display: inline-block;
+        }
+       
+
+        .footer__link {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer__link:hover {
+            color: var(--color-primary);
+        }
+
+        .footer__icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer__icon:hover {
+            transform: translateY(-3px);
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .contact {
+                padding: 0 1rem;
+            }
+            .nav__hamburger {
+                display: flex;
+            }
+
+            .nav__list {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 50%;
+            width: 40%;
+            background-color: rgba(26, 26, 26, 0.95);
+            padding: var(--spacing-medium);
+            transform: translateX(100%); 
+            transition: transform 0.3s ease-in-out;/
+        }}
+    </style>
 </head>
 <body>
-     <header>
+    <header class="nav">
+        <div class="nav__hamburger" onclick="toggleMenu()">
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+        </div>
         <nav aria-label="Main Navigation">
-            <ul role="menubar">
-                <li role="none"><a href="home.html" role="menuitem">HOME</a></li>
-                <li role="none"><a href="about.html" role="menuitem">ABOUT</a></li>
-                <li role="none"><a href="blog.html" role="menuitem">BLOG</a></li>
-                <li role="none"><a href="service.html" role="menuitem">SERVICES</a></li>
-                <li role="none"><a href="contact.html" role="menuitem">CONTACT</a></li>
+            <ul class="nav__list" role="menubar">
+                <li class="nav__item" role="none">
+                    <a href="home.html" class="nav__link" role="menuitem">Home</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="about.html" class="nav__link" role="menuitem">About</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="blog.html" class="nav__link" role="menuitem">Blog</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="service.html" class="nav__link" role="menuitem">Service</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="contact.html" class="nav__link nav__link--active" role="menuitem">Contact</a>
+                </li>
             </ul>
         </nav>
-    </header> 
-    
-   <main id="main-content">
-    <section id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title">Do You Want To Get In Touch?</h2>
-        <form  aria-label="Contact Form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required aria-required="true">
+    </header>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required aria-required="true">
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required aria-required="true"></textarea>
+    <main class="main">
+        <section class="contact">
+            <h1 class="contact__title">Contact</h1>
+            <h2 class="contact__subtitle">Want To Get In Touch?</h2>
+            
+            <form class="contact__form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName" 
+                        placeholder="John Doe"
+                        required
+                    >
+                </div>
 
-            <button type="submit">Send</button>
-        </form>
-    </section>
-   </main>
-   
-   <footer>
-    <ul aria-label="Social Media Links">
-        <li>
-            <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                <img src="Images/github_logo.png" width="40" height="40" alt=" Check out my git hub">
-            </a>
-        </li>
-        <li >
-            <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                <img src="Images/linkedIn_logo.png" width="40" height="40" alt="linked account">
-            </a>
-        </li>
-        <li>
-            <a href="mailto:Milkilegese6@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Contact">
-               <img src="Images/email_logo.png" width="40" height="40"  alt="email me">
-            </a>
-        </li>
-    </ul>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="example@domain.com"
+                        required
+                    >
+                </div>
 
-</footer> 
-    
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="phone-group">
+                        <select id="inquiry" name="inquiry" required>
+                            <option value="">Inquiry</option>
+                            <option value="general">General</option>
+                            <option value="business">Business</option>
+                            <option value="support">Support</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="123-456-789"
+                            pattern="[0-9-]+"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer class="footer">
+        <ul class="footer__list" aria-label="Social Media Links">
+            <li class="footer__item">
+                <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" 
+                   aria-label="GitHub Profile" class="footer__link">
+                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThdZlszhihSfJBfoXkpJtOvDk9p_sskS4rSQ&s" class="footer__icon" alt="github link">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" 
+                   rel="noopener noreferrer" aria-label="LinkedIn Profile" class="footer__link">
+                    <img src="https://i.pinimg.com/564x/6b/ab/30/6bab3017350ca04c6fa05569672bd31e.jpg" class="footer__icon" alt="LinkedIn">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="mailto:example@email.com" target="_blank" rel="noopener noreferrer" 
+                   aria-label="Email Contact" class="footer__link">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKtMxPYeDrZNx4OsXl26sJgg1xcpeOKzoE3Q&s" class="footer__icon" alt="Email">
+                </a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

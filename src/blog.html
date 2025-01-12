@@ -5,77 +5,428 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
     <link rel="icon" href="Images/portfolio.png" type="image/png">
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            --color-primary: #FFD700;
+            --color-secondary: #B8860B;
+            --color-background: #1A1A1A;
+            --color-text: #FFFFFF;
+            --spacing-large: 2rem;
+            --spacing-medium: 1.5rem;
+            --spacing-small: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar{
+            display: none;
+        }
+
+        .nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: var(--spacing-small);
+            background-color: rgba(26, 26, 26, 0.95);
+            animation: SlideLeft 0.5s ease-out;
+        }
+        
+
+        .nav__list {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            list-style: none;
+            padding: var(--spacing-small) var(--spacing-medium);
+        }
+
+        .nav__item {
+            position: relative;
+        }
+
+        .nav__link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            transition: color 0.3s ease;
+        }
+
+        .nav__link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav__link--active {
+            position: relative;
+        }
+        .nav__link--active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .nav__hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .nav__hamburger-line {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-text);
+            transition: 0.3s ease;
+        }
+                .nav__hamburger--active .nav__hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translateY(12px) translateX(2px)
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px)
+        }
+
+        
+        /* Blog Content */
+        .blog-container {
+            margin-top: 80px;
+            padding: 0 20px;
+        }
+
+        .blog-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .blog-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--color-primary);
+        }
+
+        .blog-posts {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .blog-post {
+            border-bottom: 1px solid #333;
+            padding: 40px 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        .blog-post-image {
+            flex: 0 0 300px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-post-content {
+            flex: 1;
+        }
+
+        .blog-post-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .blog-post-text {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .code-block {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #4CAF50;
+            font-family: monospace;
+        }
+        .remove {
+           display: none;
+        }
+
+        .read-more {
+            display: inline-block;
+            background-color: var(--color-secondary);
+            color: black;
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more:hover {
+            background-color: #ccac00;
+        }
+
+        .blog-post-full-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .blog-post-full-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+
+        /* Footer */
+        .footer {
+            padding: var(--spacing-medium);
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer__list {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-medium);
+            list-style: none;
+        }
+        .blog-post-full-content{
+          margin-bottom: var(--spacing-medium);
+        }
+
+        .footer__icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer__icon:hover {
+            transform: translateY(-3px);
+        }
+       
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .nav__hamburger {
+                display: flex;
+            }
+
+            .nav__list {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 50%;
+            width: 40%;
+            background-color: rgba(26, 26, 26, 0.95);
+            padding: var(--spacing-medium);
+            transform: translateX(100%); /* Start off-screen */
+            transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.nav__list--active {
+    transform: translateX(0); /* Slide into view */
+}
+          
+            .blog-post {
+                flex-direction: column;
+            }
+
+            .blog-post-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        /* Animations */
+        @keyframes SlideLeft {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav aria-label="Main Navigation">
-            <ul role="menubar">
-                <li role="none"><a href="home.html" role="menuitem">HOME</a></li>
-                <li role="none"><a href="about.html" role="menuitem">ABOUT</a></li>
-                <li role="none"><a href="blog.html" role="menuitem">BLOG</a></li>
-                <li role="none"><a href="service.html" role="menuitem">SERVICES</a></li>
-                <li role="none"><a href="contact.html" role="menuitem">CONTACT</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-         
-        <section id="blog" class="blog-page">
-            
-            <h1>BLOG</h1>
-          
-            <div class="blog-posts">
-              <article>
-                <img src="Images/future_of_web.jpg" height="200" alt="Blog post 1 thumbnail">
-                <h2>The Future of Web Design</h2>
-                <p>
-                    The future of web design is driven by innovation, personalization, and inclusivity, shaping digital experiences that are more dynamic and user-centric. With advancements in AI, designers can create smarter interfaces that adapt to individual preferences in real time, offering a tailored experience. Immersive technologies like AR and VR are merging the physical and digital worlds, redefining how users interact with content. Accessibility and inclusivity are becoming non-negotiable, ensuring designs cater to diverse audiences. Sustainable design practices are also gaining traction, focusing on energy-efficient websites. As technology evolves, web design will continue to balance creativity with functionality, enhancing engagement for all.
-                </p>
-              </article>
-          
-              <article>
-                <img src="Images/css_grid.jpg" height="200" alt="CSS Grid Layout">
-                <h2>Mastering CSS Grid Layout</h2>
-                <p>CSS Grid is a revolutionary layout system that makes creating complex designs easy. Unlike traditional methods like floats or flexbox, Grid introduces a two-dimensional grid-based approach.</p>
-                <p>For example, you can define rows and columns explicitly, making layout structures more intuitive. Here's a simple example:</p>
-                <pre>
-                  .container {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 10px;
-                  }
-                </pre>
-                <p>This code creates a container with three equal-width columns and a 10px gap between items. As you delve deeper into CSS Grid, you'll unlock tools like `grid-area`, `grid-template-areas`, and `auto-fit` for responsive design. Start experimenting with CSS Grid, and watch your layouts transform!</p>
-              </article>
-              <article>
-                <img src="Images/web_accessibility.png" height="200" alt="Blog post 3 thumbnail">
-                <h2>The Importance of Accessibility</h2>
-                <p>Accessibility is crucial in creating an inclusive world where everyone, regardless of ability, can participate and thrive. In digital spaces, accessibility ensures that websites, apps, and technologies are usable by individuals with disabilities, such as those with visual, auditory, or motor impairments. By incorporating accessibility features like screen reader compatibility, keyboard navigation, and alternative text for images, we not only comply with ethical and legal standards but also enhance user experience for all. Accessibility benefits businesses by reaching wider audiences and fostering innovation through universal design. Ultimately, prioritizing accessibility reflects a commitment to equity, breaking barriers, and empowering every individual.</p>
-              </article>
-            </div>
-          
-          </section>
-    </main>
-    
-    <footer>
-    
-        <ul aria-label="Social Media Links">
-            <li >
-                <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                    <img src="Images/github_logo.png" width="40" height="40" alt=" Check out my git hub">
-                </a>
+  <header class="nav">
+    <div class="nav__hamburger" onclick="toggleMenu()">
+        <span class="nav__hamburger-line"></span>
+        <span class="nav__hamburger-line"></span>
+        <span class="nav__hamburger-line"></span>
+    </div>
+    <nav aria-label="Main Navigation">
+        <ul class="nav__list" role="menubar">
+            <li class="nav__item" role="none">
+                <a href="home.html" class="nav__link " role="menuitem">Home</a>
             </li>
-            <li >
-                <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                    <img src="Images/linkedIn_logo.png" width="40" height="40" alt="linked account">
-                </a>
+            <li class="nav__item" role="none">
+                <a href="about.html" class="nav__link" role="menuitem">About</a>
             </li>
-            <li>
-                <a href="mailto:Milkilegese6@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Contact">
-                   <img src="Images/email_logo.png" width="40" height="40"  alt="email me">
-                </a>
+            <li class="nav__item" role="none">
+                <a href="blog.html" class="nav__link nav__link--active" role="menuitem">Blog</a>
+            </li>
+            <li class="nav__item" role="none">
+                <a href="service.html" class="nav__link" role="menuitem">Service</a>
+            </li>
+            <li class="nav__item" role="none">
+                <a href="contact.html" class="nav__link" role="menuitem">Contact</a>
             </li>
         </ul>
-</footer>
+    </nav>
+</header>
+
+
+    <main class="blog-container">
+        <h1 class="blog-title">Blog</h1>
+        
+        <div class="blog-posts">
+            <article class="blog-post">
+                <img src="Images/future_of_web.jpg" alt="Future of Web Design" class="blog-post-image">
+                <div class="blog-post-content">
+                    <h2 class="blog-post-title">The Future of Web Design</h2>
+                    <p class="blog-post-text">
+                        The future of web design is driven by innovation, personalization, and inclusivity, shaping digital experiences that are more dynamic and user-centric...
+                    </p>
+                    <div class="blog-post-full-content" id="post-1">
+                      <p>The future of web design is driven by innovation, personalization, and inclusivity, shaping digital experiences that are more dynamic and user-centric. With advancements in AI, designers can create smarter interfaces that adapt to individual preferences in real time, offering a tailored experience.</p>
+                      <p>Immersive technologies like AR and VR are merging the physical and digital worlds, redefining how users interact with content. Accessibility and inclusivity are becoming non-negotiable, ensuring designs cater to diverse audiences.</p>
+                      <p>Sustainable design practices are also gaining traction, focusing on energy-efficient websites. As technology evolves, web design will continue to balance creativity with functionality, enhancing engagement for all.</p>
+                  </div>
+                    <button onclick="toggleReadMore(this)" class="read-more" data-post="1">Read More</button>
+                    
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <img src="Images/css_grid.jpg" alt="CSS Grid Layout" class="blog-post-image">
+                <div class="blog-post-content">
+                    <h2 class="blog-post-title">Mastering CSS Grid Layout</h2>
+                    <p class="blog-post-text">
+                        CSS Grid is a revolutionary layout system that makes creating complex designs easy...
+                    </p><div class="blog-post-full-content" id="post-2">
+                      <p>CSS Grid is a revolutionary layout system that makes creating complex designs easy. Unlike traditional methods like floats or flexbox, Grid introduces a two-dimensional grid-based approach.</p>
+                      <pre class="code-block">
+                          .container {
+                              display: grid;
+                              grid-template-columns: repeat(3, 1fr);
+                              gap: 10px;
+                          }
+                        </pre>
+                      <p>This code creates a container with three equal-width columns and a 10px gap between items. As you delve deeper into CSS Grid, you'll unlock tools like grid-area, grid-template-areas, and auto-fit for responsive design.</p>
+                  </div>
+                    <button onclick="toggleReadMore(this)" class="read-more" data-post="2">Read More</button>
+                    
+                </div>
+            </article>
+
+            <article class="blog-post">
+                <img src="Images/web_accessibility.png" alt="Web Accessibility" class="blog-post-image">
+                <div class="blog-post-content">
+                    <h2 class="blog-post-title">The Importance of Accessibility</h2>
+                    <p class="blog-post-text">
+                        Accessibility is crucial in creating an inclusive world where everyone, regardless of ability, can participate and thrive...
+                    </p> <div class="blog-post-full-content" id="post-3">
+                      <p>Accessibility is crucial in creating an inclusive world where everyone, regardless of ability, can participate and thrive. In digital spaces, accessibility ensures that websites, apps, and technologies are usable by individuals with disabilities.</p>
+                      <p>By incorporating accessibility features like screen reader compatibility, keyboard navigation, and alternative text for images, we not only comply with ethical and legal standards but also enhance user experience for all.</p>
+                      <p>Accessibility benefits businesses by reaching wider audiences and fostering innovation through universal design. Ultimately, prioritizing accessibility reflects a commitment to equity, breaking barriers, and empowering every individual.</p>
+                  </div>
+                    <button onclick="toggleReadMore(this)" class="read-more" data-post="3">Read More</button>
+                   
+                </div>
+            </article>
+        </div>
+    </main>
+    <footer class="footer">
+      <ul class="footer__list" aria-label="Social Media Links">
+          <li class="footer__item">
+              <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" 
+                 aria-label="GitHub Profile" class="footer__link">
+               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThdZlszhihSfJBfoXkpJtOvDk9p_sskS4rSQ&s" class="footer__icon" alt="github link">
+              </a>
+          </li>
+          <li class="footer__item">
+              <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" 
+                 rel="noopener noreferrer" aria-label="LinkedIn Profile" class="footer__link">
+                  <img src="https://i.pinimg.com/564x/6b/ab/30/6bab3017350ca04c6fa05569672bd31e.jpg" class="footer__icon" alt="LinkedIn">
+              </a>
+          </li>
+          <li class="footer__item">
+              <a href="mailto:example@email.com" target="_blank" rel="noopener noreferrer" 
+                 aria-label="Email Contact" class="footer__link">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKtMxPYeDrZNx4OsXl26sJgg1xcpeOKzoE3Q&s" class="footer__icon" alt="Email">
+              </a>
+          </li>
+      </ul>
+  </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const hamburger = document.querySelector('.nav__hamburger');
+            const navList = document.querySelector('.nav__list');
+            hamburger.classList.toggle('nav__hamburger--active');
+            navList.classList.toggle('nav__list--active');
+        }
+
+   
+        function toggleReadMore(button) {
+            const postId = button.getAttribute('data-post');
+            const textLess = document.querySelectorAll('.blog-post-text')
+            const content = document.getElementById(`post-${postId}`);
+            content.classList.toggle('active');
+            textLess.forEach(text => text.classList.toggle('remove'));
+            button.textContent = content.classList.contains('active') ? 'Read Less' : 'Read More';
+        }
+
+       
+        document.addEventListener('click', (e) => {
+            const navList = document.querySelector('.nav__list');
+            const hamburger = document.querySelector('.nav__hamburger');
+            if (!navList.contains(e.target) && !hamburger.contains(e.target) && navList.classList.contains('active')) {
+                navList.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

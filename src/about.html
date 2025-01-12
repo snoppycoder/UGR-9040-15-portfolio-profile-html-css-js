@@ -3,198 +3,785 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <link rel="icon" href="Images/portfolio.png" type="image/png">
+    <title>Portfolio - About Me</title>
+    <style>
+        :root {
+            --color-primary: #FFD700;
+            --color-secondary: #B8860B;
+            --color-background: #1A1A1A;
+            --color-text: #FFFFFF;
+            --spacing-large: clamp(2rem, 6vw, 6rem);
+            --spacing-medium: clamp(1.5rem, 3vw, 3rem);
+            --spacing-small: clamp(0.75rem, 1.5vw, 1.5rem);
+            --container-width: min(90%, 1200px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+::-webkit-scrollbar{
+            display: none;
+    }
+
+        .nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: var(--spacing-small);
+            background-color: rgba(26, 26, 26, 0.95);
+            animation: SlideLeft 0.5s ease-out;
+        }
+        
+
+        .nav__list {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            list-style: none;
+            padding: var(--spacing-small) var(--spacing-medium);
+        }
+
+        .nav__item {
+            position: relative;
+        }
+
+        .nav__link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            transition: color 0.3s ease;
+        }
+
+        .nav__link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav__link--active {
+            position: relative;
+        }
+        .nav__hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .nav__hamburger-line {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-text);
+            transition: 0.3s ease;
+        }
+
+        .nav__link--active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary);
+            animation: slideIn 0.3s ease-out;
+        }
+        .nav__hamburger--active .nav__hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translateY(12px) translateX(3px)
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav__hamburger--active .nav__hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px)
+        }
+        @media (max-width: 768px) {
+            .nav__hamburger {
+                display: flex;
+            }
+
+        .nav__list {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 50%;
+            width: 40%;
+            background-color: rgba(26, 26, 26, 0.95);
+            padding: var(--spacing-medium);
+                transform: translateX(100%); /* Start off-screen */
+            transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+        .nav__list--active {
+            transform: translateX(0); /* Slide into view */
+}
+
+
+      .hero__title {
+                font-size: 2.5rem;
+            }
+
+            .hero__subtitle {
+                font-size: 1.8rem;
+            }
+
+            .hero__buttons {
+                flex-direction: column;
+            }
+
+            .footer__list {
+                gap: var(--spacing-small);
+        }
+    }
+
+.main {
+    margin-top: 80px;
+    padding: var(--spacing-large);
+}
+
+.about {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-medium);
+    margin-bottom: var(--spacing-large);
+}
+
+.about__image-wrapper {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.about__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: fadeIn 1s ease-out;
+}
+
+.about__content {
+    animation: slideInRight 1s ease-out;
+}
+
+.about__title {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-small);
+    font-style: italic;
+}
+
+.about__subtitle {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-small);
+}
+
+.about__text {
+    margin-bottom: var(--spacing-medium);
+}
+
+.education {
+    max-width: 1200px;
+    margin: var(--spacing-large) auto;
+}
+
+.education__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-medium);
+}
+
+.education__image-wrapper {
+    position: relative;
+}
+
+.education__image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    animation: fadeIn 1s ease-out;
+}
+
+.education__caption {
+    margin-top: var(--spacing-small);
+    font-style: italic;
+}
+
+.education__content {
+    animation: slideInRight 1s ease-out;
+}
+
+.education__list {
+    list-style: none;
+    margin-top: var(--spacing-small);
+}
+
+.education__list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.education__list li::before {
+    content: '•';
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+}
+
+/* Expertise Section */
+.expertise {
+    max-width: 1200px;
+    margin: var(--spacing-large) auto;
+    padding: var(--spacing-medium);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.expertise__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-medium);
+}
+
+.expertise__image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    animation: fadeIn 1s ease-out;
+}
+
+.expertise__list {
+    list-style: none;
+}
+
+.expertise__list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.expertise__list li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+}
+
+/* Hobby Section */
+.hobby {
+    max-width: 1200px;
+    margin: var(--spacing-large) auto;
+}
+
+.hobby__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-medium);
+    margin-bottom: var(--spacing-medium);
+}
+
+
+.hobby__gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-medium);
+}
+
+.hobby__gallery-item {
+    text-align: center;
+}
+video {
+        max-width: 100%;
+}
+   
+
+.hobby__gallery-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: var(--spacing-small);
+}
+
+/* Certificate Section */
+.certificate {
+    max-width: 1200px;
+    margin: var(--spacing-large) auto;
+}
+
+.certificate__container {
+    display: flex;
+    gap: var(--spacing-medium);
+    overflow-x: auto;
+    padding: var(--spacing-small);
+    scroll-snap-type: x mandatory;
+}
+
+.certificate__item {
+    flex: 0 0 auto;
+    width: 300px;
+    scroll-snap-align: start;
+}
+
+.certificate__image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.testimonials {
+    max-width: 1200px;
+    margin: var(--spacing-large) auto;
+}
+
+.testimonial {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-medium);
+    padding: var(--spacing-medium);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-medium);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.testimonial__image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial__stars {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-small);
+}
+
+.testimonial__text {
+    margin-bottom: var(--spacing-small);
+}
+
+.testimonial__author {
+    color: var(--color-primary);
+}
+
+/* Footer */
+.footer {
+        padding: var(--spacing-medium);
+        position: relative; /* Changed from absolute to relative for better control */
+        width: 100%;
+        text-align: center;
+        background-color: var(--color-background);
+        margin-top: auto; /* Ensures footer is pushed to the bottom if there's space */
+        animation: fadeInUp 1.6s ease-out;
+    }
+
+        .footer__list {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-medium);
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .footer__item {
+            display: inline-block; /* Ensures proper layout for each icon */
+        }
+
+        .footer__link {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer__link:hover {
+            color: var(--color-primary);
+        }
+
+        .footer__icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer__icon:hover {
+            transform: translateY(-3px);
+        }
+         
+/* Animations */
+@keyframes slideIn {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .nav__list {
+        justify-content: space-between;
+    }
+
+    .about__container,
+    .education__container,
+    .expertise__container,
+    .hobby__container {
+        grid-template-columns: 1fr;
+    }
+
+    .about__image-wrapper {
+        height: 300px;
+    }
+
+    .testimonial {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .testimonial__image {
+        margin: 0 auto;
+    }
+}
+
+   @media (max-width: 480px) {
+    
+    .nav__list {
+        flex-wrap: wrap;
+        gap: var(--spacing-small);
+    }
+
+    .about__title {
+        font-size: 1.5rem;
+    }
+
+    .about__subtitle {
+        font-size: 1.5rem;
+    }
+
+    .hobby__gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .certificate__container {
+        gap: var(--spacing-small);
+    }
+
+    .certificate__item {
+        width: 250px;
+    }
+}
+    </style>
+    <script defer>
+         function toggleMenu() {
+            const hamburger = document.querySelector('.nav__hamburger');
+            const navList = document.querySelector('.nav__list');
+
+           
+            hamburger.classList.toggle('nav__hamburger--active');
+            navList.classList.toggle('nav__list--active');
+        }
+       document.addEventListener('DOMContentLoaded', () => {
+   
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.querySelector('.nav__menu');
+        const navLinks = document.querySelectorAll('.nav__link');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('nav__hamburger--active');
+            navMenu.classList.toggle('nav__menu--active');
+            document.body.classList.toggle('no-scroll');
+        });
+    
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections and images
+    document.querySelectorAll('section, img').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+});
+    </script>
 </head>
 <body>
-    <header>
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Portfolio - About Me</title>
+ 
+</head>
+<body>
+    <header class="nav">
+        <div class="nav__hamburger" onclick="toggleMenu()">
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+        </div>
         <nav aria-label="Main Navigation">
-            <ul role="menubar">
-                <li role="none"><a href="home.html" role="menuitem">HOME</a></li>
-                <li role="none"><a href="about.html" role="menuitem">ABOUT</a></li>
-                <li role="none"><a href="blog.html" role="menuitem">BLOG</a></li>
-                <li role="none"><a href="service.html" role="menuitem">SERVICES</a></li>
-                <li role="none"><a href="contact.html" role="menuitem">CONTACT</a></li>
+            <ul class="nav__list" role="menubar">
+                <li class="nav__item">
+                    <a href="home.html" class="nav__link" role="menuitem">Home</a>
+                </li>
+                <li class="nav__item">
+                    <a href="about.html" class="nav__link nav__link--active" role="menuitem">About</a>
+                </li>
+                <li class="nav__item">
+                    <a href="blog.html" class="nav__link" role="menuitem">Blog</a>
+                </li>
+                <li class="nav__item" >
+                    <a href="service.html" class="nav__link" role="menuitem">Service</a>
+                </li>
+                <li class="nav__item" >
+                    <a href="contact.html" class="nav__link" role="menuitem">Contact</a>
+                </li>
             </ul>
         </nav>
-    </header> 
-    <main id="main-content">
-        <section id="about" aria-labelledby="intro-title">
-            <h2 id="intro-title">About Me</h2>
-            <article>
-                <h2>Introduction</h2>
-                <img src="Images/Introduction.jpg" width="300" height="400" alt="Introductory image" aria-describedby="profile-desc">
-                <p id="profile-desc">
-                    I am Milki, a third-year software engineering student with a strong foundation in JavaScript and a focus on building scalable and efficient applications. My experience includes developing a web application for task management, integrating APIs, and deploying applications on Render. I have worked on building RESTful APIs for real-time data processing and developing data visualization dashboards using JavaScript frameworks like React. Passionate about creating user-centric solutions, I strive to contribute to impactful projects that improve overall user experience and drive business outcomes.  
-                    <br>  
-                    <p>
-                      <span id="listen">Listen</span>  
-                       <audio src="Audio/audio.mp3" aria-labelledby="listen" controls></audio>
+    </header>
+  
+    <main class="main">
+        <!-- About Section -->
+        <section class="about">
+            <div class="about__container">
+                <div class="about__image-wrapper">
+                    <img src="Images/Introduction.jpg" alt="Workspace with laptop showing code" class="about__image">
+                </div>
+                <div class="about__content">
+                    <h1 class="about__title">About Me!</h1>
+                    <h2 class="about__subtitle">Introduction</h2>
+                    <p class="about__text">
+                        I am Milki, a third-year software engineering student with a strong foundation in
+                        JavaScript and a focus on building scalable and efficient applications. My experience includes
+                        developing a web application for task management, integrating APIs, and deploying applications
+                        on Render. I have worked on building RESTful APIs for real-time data processing and developing
+                        data visualization dashboards using JavaScript frameworks like React. Passionate about creating
+                        user-centric solutions, I strive to contribute to impactful projects that improve overall user
+                        experience and drive business outcomes.
                     </p>
-            </article>
-            <article>
-                <h2>Education</h2>
-                <ul>
-                  <li>
-                    <strong>Bachelor of Software Engineering</strong>  
-                    <br>
-                    Addis Ababa University, Ethiopia  
-                    <br>
-                    <img src="Images/education_section.jpg" alt="campus_photo" width="300" height="200"><br> 
-                    Expected Graduation: Aug 2027  
-                    <br>
-                    <em>Currently pursuing a Bachelor's degree with a focus on building a strong foundation in software engineering principles, programming languages, and system architecture. Through my coursework, I've gained a deep understanding of data structures, algorithms, and the intricacies of web development, which have provided me with a solid technical skillset. This includes working with languages like JavaScript, HTML, and CSS, as well as frameworks such as React to build interactive web applications.</em>
-                    <br><br>
-                    My studies also emphasize the importance of software testing, quality assurance, and understanding complex systems, allowing me to approach problem-solving with a comprehensive mindset. As I progress through the program, I have developed a passion for tackling real-world software engineering challenges and actively seek opportunities to apply my skills in practical settings, both through academic projects and personal coding initiatives.
-                  </li>
-                  <li>
-                    <strong>Relevant Coursework:</strong>  
-                    <ul>
-                        <li>Data Structures and Algorithms</li>    
-                        <li>Web Development (HTML, CSS, JavaScript, React)</li> 
-                        <li>Computer Architecture</li>  
+                   <audio src="Audio/audio.mp3" controls>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="education">
+            <h2 class="education__title">Education</h2>
+            <div class="education__container">
+                <div class="education__image-wrapper">
+                    <img src="Images/education_section.jpg" alt="Addis Ababa University Campus" class="education__image">
+                    <p class="education__caption">Bachelor of Software Engineering Addis Ababa University, Ethiopia</p>
+                </div>
+                <div class="education__content">
+                    <p class="education__graduation">Expected Graduation: Aug 2027</p>
+                    <p class="education__description">
+                        Currently pursuing a Bachelor's degree with a focus on building a strong foundation in software engineering principles,
+                        programming languages, and system architecture. Through my coursework, I've gained a deep understanding of data
+                        structures, algorithms, and the intricacies of web development, which have provided me with a solid technical skillset.
+                    </p>
+                    <h3 class="education__subtitle">Relevant Coursework:</h3>
+                    <ul class="education__list">
+                        <li>Data Structures and Algorithms</li>
+                        <li>Web Development (HTML, CSS, JavaScript, React)</li>
+                        <li>Computer Architecture</li>
                         <li>Fundamentals of Software Engineering</li>
                         <li>Software Testing and Quality Assurance</li>
                         <li>Databases and SQL</li>
                         <li>Operating Systems</li>
                     </ul>
-                  </li>
-                  <li>
-                    <strong>Achievements:</strong>  
-                    <ul>
-                        <li>Developed a payroll management system during an internship, integrating biometric verification and tax calculations.</li>
-                        <li>Certified in Full-Stack Web Development, covering frameworks like React and Node.js.</li>
-                        <li>Completed 100+ LeetCode problems</li>
-                        <li>Active member of the university's Google Developers Club</li>
-                        <li>Certified in Advanced Java Programming, with hands-on experience building scalable applications.</li>
-
-                    </ul>
-                  </li>
-                </ul>
-                
-                <h2>Expertise</h2>
-                <img src="Images/expertise_article.png" height="350" alt="">
-            <ul>
-            <li>
-                <strong>Programming Languages:</strong>  
-                   <ul>
-                    <li role="none">JavaScript</li>
-                    <li role="none">TypeScript</li>
-                    <li role="none">Python</li>
-                    <li role="none">Java</li>
-                    <li role="none">SQL</li>  
-
-                   </ul>
-                   
-            </li>
-            <li>
-                <strong>Web Development:</strong>  
-                Proficient in React, HTML5, CSS3, and Node.js. Experience with building responsive and user-centric interfaces.  
-            </li>
-            <li>
-                <strong>Backend Development:</strong>  
-                Skilled in creating RESTful APIs, integrating third-party APIs, and using databases like Supabase and MongoDB.  
-            </li>
-            <li>
-                <strong>DevOps:</strong>  
-                Experience deploying applications on Render and version control with Git/GitHub.  
-            </li>
-            <li>
-                <strong>Problem Solving:</strong>  
-                Completed 50+ LeetCode problems focusing on sliding window, dynamic programming, and greedy algorithms.  
-            </li>
-            </ul>
-            </article>
-            <article id="work-desc">
-                <h3>Work Experience</h3>
-                <p>
-
-                Intern, NH Business Center (Jul 2024 - Oct 2024)
-                Contributed to developing a payroll website with tax integration, automating payroll processes for businesses. Implemented biometric authentication and attendance tracking using a deep learning Java framework, improving accuracy and security. Enhanced data management and user authentication through back-end development with Java and SQL. Collaborated with senior developers to resolve issues, optimize performance, and enhance the user experience. Gained practical exposure to machine learning techniques applied to biometric data, deepening expertise in AI technologies.
-                </p>
-            </article>
-            <span id="prompt_to_download">Download Resume?</span>
-            <a href="Resume/Resume.pdf" aria-labelledby="prompt_to_download" download>Download Resume</a>
-            <article>
-                <h2>Hobby</h2>
-                <p>
-                    <strong>Exploring Artificial Intelligence:</strong> One of my favorite hobbies is diving into the fascinating world of AI, where creativity meets cutting-edge technology. I enjoy experimenting with machine learning algorithms, training models to uncover patterns in data, and developing small AI-powered projects that solve practical problems. From building chatbots that can engage in meaningful conversations to creating recommendation systems that mimic human decision-making, this hobby constantly challenges me to think innovatively. I find joy in exploring platforms like <a href="https://huggingface.co" target="_blank">Hugging Face</a> and <a href="https://www.tensorflow.org/" target="_blank">TensorFlow</a>, where I can tinker with tools and libraries that make AI accessible. For me, AI is not just about technology—it’s about understanding how intelligence works and using that knowledge to create something impactful. It’s a journey of constant learning and discovery, and it fuels my passion for pushing the boundaries of what’s possible.
-
-                  </p>
-                  <aside>
-
-                    <video src="Video/videoplayback.mp4" controls preload="metadata"></video>
-                </aside>
-                  <figure>
-                    <img src="Images/ai_phone.jpg" height="250" alt="A description of the image">
-                    <figcaption>AI, once unimaginable, is now just a tap away</figcaption>
-                  </figure>
-                  <figure>
-                    <img src="Images/ai_vehicle.jpg"  height="250" alt="A description of the image">
-                    <figcaption>A street-sweeper that implements AI</figcaption>
-                  </figure>
-                  
-            </article>
-            <article class="certificate" aria-labelledby="certificate-heading">
-                <h2 id="certificate-heading">Certificate</h2>
-                <img src="Images/Certificate2.png" width="300" alt="Certificate">
-               <img src="Images/Certificate3.jpg" width="300" alt="Certificate">
-               <img src="Images/certificate4.jpg" width="300" alt="Certificate">
-         </article>
-                   
-             <article aria-labelledby="testimonials-heading">
-                <h2 id="testimonials-heading">Testimonials</h2>
-                <div class="testimonial">
-                    <img src="Images/user.png"  width="40" height="40" alt="avatar" class="testimonial-avatar">
-                    <blockquote>
-                           <p>The quality of work and attention to detail exceeded our expectations.</p>
-                          <footer>
-                             <cite>Liyu Mesfin, Tech Lead</cite>
-                           </footer>
-                         </blockquote>
-
                 </div>
-                      <div class="testimonial">
-                        <img src="Images/user.png" width="40" height="40" alt="avatar" class="testimonial-avatar">
-                        <blockquote>
-                          <p>Delivered the project on time and with exceptional quality.</p>
-                          <footer>
-                            <cite>Mekonnen Alemayehu, Project Manager</cite>
-                          </footer>
-                        </blockquote>
-                      </div>
-                     <div class="testimonial">
-                        <img src="Images/user.png" alt="avatar" height="40" width="40" class="testimonial-avatar">
-                        <blockquote>
-                            <p>Working with Milki has been an absolute privilege. Their problem-solving skills and dedication to delivering high-quality solutions are unmatched. Whether tackling complex coding challenges or creating user-friendly designs, they always approach tasks with creativity and a clear vision.</p>
-                        </blockquote>
-                        <cite>
-                            Tesfaye Bekele, Team Lead
-                        </cite>
-                     </div>
-             </article>
+            </div>
         </section>
+
+        <!-- Expertise Section -->
+        <section class="expertise">
+            <h2 class="expertise__title">Expertise</h2>
+            <div class="expertise__container">
+                <div class="expertise__image-wrapper">
+                    <img src="Images/expertise_article.png" alt="Programming Setup" class="expertise__image">
+                </div>
+                <div class="expertise__content">
+                    <h3 class="expertise__subtitle">Programming Languages:</h3>
+                    <ul class="expertise__list">
+                        <li>JavaScript</li>
+                        <li>TypeScript</li>
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>SQL</li>
+                    </ul>
+                    <div class="expertise__details">
+                        <p>Web Development: Proficient in React, HTML5, CSS3, and Node.js. Experience with building responsive and user-centric interfaces.</p>
+                        <p>Backend Development: Skilled in creating RESTful APIs, integrating third-party APIs, and using databases like Supabase and MongoDB.</p>
+                        <p>DevOps: Experience deploying applications on Render and version control with Git/GitHub.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobby Section -->
+        <section class="hobby">
+            <h2 class="hobby__title">Hobby</h2>
+            <div class="hobby__container">
+                <video src="Video/videoplayback.mp4" controls></video>
+                <div class="hobby__content">
+                    <p>
+                        Exploring Artificial Intelligence: One of my favorite hobbies is diving into the
+                        fascinating world of AI, where creativity meets cutting-edge technology. I enjoy
+                        experimenting with machine learning algorithms, training models to uncover
+                        patterns in data, and developing small AI-powered projects that solve practical
+                        problems. From building chatbots that can engage in meaningful conversations
+                        to creating recommendation systems that mimic human decision-making, this
+                        hobby constantly challenges me to think innovatively.
+                    </p>
+                </div>
+            </div>
+            <div class="hobby__gallery">
+                <div class="hobby__gallery-item">
+                    <img src="Images/ai_phone.jpg" alt="AI Demo" class="hobby__gallery-image">
+                    <p class="hobby__gallery-caption">AI, once unimaginable, is now just a tap away</p>
+                </div>
+                <div class="hobby__gallery-item">
+                    <img src="Images/ai_vehicle.jpg" alt="AI Street Sweeper" class="hobby__gallery-image">
+                    <p class="hobby__gallery-caption">A street-sweeper that implements AI</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificate Section -->
+        <section class="certificate">
+            <h2 class="certificate__title">Certificate</h2>
+            <div class="certificate__container">
+                <div class="certificate__item">
+                    <img src="Images/certificate4.jpg" alt="AWS Certification" class="certificate__image">
+                </div>
+                <div class="certificate__item">
+                    <img src="Images/Certificate3.jpg" alt="Excellence Certificate" class="certificate__image">
+                </div>
+                <div class="certificate__item">
+                    <img src="Images/Certificate2.png" alt="Programming Fundamentals" class="certificate__image">
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2 class="testimonials__title">Testimonials</h2>
+            <div class="testimonials__container">
+                <div class="testimonial">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzONgp5uMPTZgNVU8SziLUZWe9eiaoRKn_Pg&s" alt="Liyu Mesfin" class="testimonial__image">
+                    <div class="testimonial__content">
+                        <div class="testimonial__stars">★★★★★</div>
+                        <p class="testimonial__text">The quality of work and attention to detail exceeded our expectations.</p>
+                        <p class="testimonial__author">Liyu Mesfin | Tech Lead</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <img src="https://allaboutethio.com/images/richest-ethiopians-belayneh-kindie.jpg" alt="Mekonnen Alemayehu" class="testimonial__image">
+                    <div class="testimonial__content">
+                        <div class="testimonial__stars">★★★★★</div>
+                        <p class="testimonial__text">Delivered the project on time and with exceptional quality.</p>
+                        <p class="testimonial__author">Mekonnen Alemayehu | Project Manager</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <img src="https://img.freepik.com/free-photo/handsome-businessman-white-background_1368-6022.jpg" alt="James Michael Anderson" class="testimonial__image">
+                    <div class="testimonial__content">
+                        <div class="testimonial__stars">★★★★★</div>
+                        <p class="testimonial__text">Working with Milki has been an absolute privilege. Their problem-solving skills and dedication to delivering high-quality solutions are unmatched. Whether tackling complex coding challenges or creating user-friendly designs, they always approach tasks with creativity and a clear vision.</p>
+                        <p class="testimonial__author">James Michael Anderson | Team Lead</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
     </main>
-    
-    <footer>
-    
-        <ul aria-label="Social Media Links">
-            <li >
-                <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                    <img src="Images/github_logo.png" width="40" height="40" alt=" Check out my git hub">
+    <footer class="footer">
+        <ul class="footer__list" aria-label="Social Media Links">
+            <li class="footer__item">
+                <a href="https://github.com/snoppycoder/" target="_blank" rel="noopener noreferrer" 
+                   aria-label="GitHub Profile" class="footer__link">
+                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThdZlszhihSfJBfoXkpJtOvDk9p_sskS4rSQ&s" class="footer__icon" alt="github link">
                 </a>
             </li>
-            <li >
-                <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                    <img src="Images/linkedIn_logo.png" width="40" height="40" alt="linked account">
+            <li class="footer__item">
+                <a href="https://www.linkedin.com/in/milki-legesse-66607a312/" target="_blank" 
+                   rel="noopener noreferrer" aria-label="LinkedIn Profile" class="footer__link">
+                    <img src="https://i.pinimg.com/564x/6b/ab/30/6bab3017350ca04c6fa05569672bd31e.jpg" class="footer__icon" alt="LinkedIn">
                 </a>
             </li>
-            <li>
-                <a href="mailto:Milkilegese6@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Contact">
-                   <img src="Images/email_logo.png" width="40" height="40"  alt="email me">
+            <li class="footer__item">
+                <a href="mailto:example@email.com" target="_blank" rel="noopener noreferrer" 
+                   aria-label="Email Contact" class="footer__link">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKtMxPYeDrZNx4OsXl26sJgg1xcpeOKzoE3Q&s" class="footer__icon" alt="Email">
                 </a>
             </li>
         </ul>
-</footer>
+    </footer>
+
+   
+
 </body>
 </html>
